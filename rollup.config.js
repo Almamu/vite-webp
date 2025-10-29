@@ -3,15 +3,15 @@ import commonjs from '@rollup/plugin-commonjs';
 import cleanup from 'rollup-plugin-cleanup';
 import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
-import { name, version, author } from './package.json';
+import terser from '@rollup/plugin-terser';
+import pkg from './package.json' with { type: 'json' };
 import process from 'process';
 
 const isDev = process.env.NODE_ENV === 'development';
 
 const banner =
-    `${'/*!\n' + ' * '}${name} v${version}\n` +
-    ` * (c) ${new Date()} ${author}\n` +
+    `${'/*!\n' + ' * '}${pkg.name} v${pkg.version}\n` +
+    ` * (c) ${new Date()} ${pkg.author}\n` +
     ` * Released under the MIT License.\n` +
     ` */`;
 
@@ -38,19 +38,19 @@ export default [
     input: 'src/main.ts',
     output: [
       {
-        file: `lib/${name}.js`,
+        file: `lib/${pkg.name}.js`,
         format: 'cjs',
-        name,
+        name: pkg.name,
         banner
       },
       {
-        file: `lib/${name}.min.js`,
+        file: `lib/${pkg.name}.min.js`,
         format: 'cjs',
         banner,
         plugins: [terser()]
       },
       {
-        file: `lib/${name}.esm.js`,
+        file: `lib/${pkg.name}.esm.js`,
         format: 'esm',
         banner
       }
