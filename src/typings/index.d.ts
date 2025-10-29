@@ -16,6 +16,7 @@ interface UserOptions {
   include?: string | string[],
   declude?: string | string[],
   onlyWebp?: string | string[],
+  output?: string | string[],
   alias?: AliasItem[]
   // https://sharp.pixelplumbing.com/api-output#webp
   sharpOptions?: any
