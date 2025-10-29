@@ -14,6 +14,9 @@ function createWebp(dir: string, output: string | null, options: UserOptions) {
       createWebp(abs, output ? path.join(output, v) : null, options);
     } else if (helper.isTargetImage(abs, imageType)) {
       const nPath = helper.getWebpPath(output ? path.join(output, v) : v);
+      if (output) {
+        fs.mkdirSync(output, { recursive: true });
+      }
       sharpWebp(abs, nPath, sharpOptions);
     }
   })
