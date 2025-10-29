@@ -13,7 +13,7 @@ function createWebp(dir: string, output: string | null, options: UserOptions) {
     if (helper.isDirectory(abs)) {
       createWebp(abs, output ? path.join(output, v) : null, options);
     } else if (helper.isTargetImage(abs, imageType)) {
-      const nPath = path.join(output, helper.getWebpPath(abs));
+      const nPath = helper.getWebpPath(output ? path.join(output, v) : v);
       sharpWebp(abs, nPath, sharpOptions);
     }
   })
